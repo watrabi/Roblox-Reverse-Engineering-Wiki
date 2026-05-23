@@ -65,6 +65,45 @@ function resolveArticlePath(string $path): ?string {
     return $resolved;
 }
 
+function extractLinks(string $line): array {
+    $links = [];
+    $line = preg_replace_callback('/<([^\s<>]+)>/', function($m) use (&$links) {
+        $links[] = $m[1];
+        return "\x00LINK" . (count($links)-1) . "\x00";
+    }, $line);
+    $line = preg_replace_callback('/\[([^\]]+)\]\(((?:https?:\/\/)?[^)]+)\)/', function($m) use (&$links) {
+        $links[] = [$m[1], $m[2]];
+        return "\x00MDLINK" . (count($links)-1) . "\x00";
+    }, $line);
+    return [$line, $links];
+}
+
+function restoreLinks(string $text, array $links): string {
+    foreach ($links as $i => $link) {
+        $placeholder = "\x00" . (is_array($link) ? "MDLINK$i" : "LINK$i") . "\x00";
+        if (is_array($link)) {
+            $text = str_replace($placeholder, '<a href="' . htmlspecialchars($link[1]) . '">' . htmlspecialchars($link[0]) . '</a>', $text);
+        } else {
+            $text = str_replace($placeholder, '<a href="' . htmlspecialchars($link) . '">' . htmlspecialchars($link) . '</a>', $text);
+        }
+    }
+    return $text;
+}
+
+function inlineMarkdown(string $text): string {
+    $text = preg_replace('/\*\*(.+?)\*\*/', '<strong>$1</strong>', $text);
+    $text = preg_replace('/\*(.+?)\*/', '<em>$1</em>', $text);
+    $text = preg_replace('/`(.+?)`/', '<code>$1</code>', $text);
+    return $text;
+}
+
+function processInline(string $raw): string {
+    [$withPlaceholders, $links] = extractLinks($raw);
+    $escaped = htmlspecialchars($withPlaceholders);
+    $rendered = inlineMarkdown($escaped);
+    return restoreLinks($rendered, $links);
+}
+
 function renderMarkdown(string $raw): string {
     $lines = explode("\n", $raw);
     $html = '';
@@ -115,7 +154,7 @@ function renderMarkdown(string $raw): string {
             $closeTable();
             if ($inList) { $html .= ($listType === 'ul') ? "</ul>\n" : "</ol>\n"; $inList = false; }
             if (!$inBlockquote) { $html .= "<blockquote>\n"; $inBlockquote = true; }
-            $html .= "<p>" . htmlspecialchars(substr($trimmed, 2)) . "</p>\n";
+            $html .= "<p>" . processInline(substr($trimmed, 2)) . "</p>\n";
             continue;
         }
         if ($inBlockquote) { $html .= "</blockquote>\n"; $inBlockquote = false; }
@@ -134,15 +173,14 @@ function renderMarkdown(string $raw): string {
             $closeTable();
             if ($inList && $listType !== 'ul') { $html .= "</ol>\n<ul>\n"; $listType = 'ul'; }
             if (!$inList) { $html .= "<ul>\n"; $inList = true; $listType = 'ul'; }
-            $html .= "<li>" . inlineMarkdown(htmlspecialchars(trim($m[1]))) . "</li>\n";
+            $html .= "<li>" . processInline(trim($m[1])) . "</li>\n";
             continue;
         }
 
         if (preg_match('/^\d+[.)]\s(.+)/', $line, $m)) {
-            $closeTable();
             if ($inList && $listType !== 'ol') { $html .= "</ul>\n<ol>\n"; $listType = 'ol'; }
             if (!$inList) { $html .= "<ol>\n"; $inList = true; $listType = 'ol'; }
-            $html .= "<li>" . inlineMarkdown(htmlspecialchars(trim($m[1]))) . "</li>\n";
+            $html .= "<li>" . processInline(trim($m[1])) . "</li>\n";
             continue;
         }
 
@@ -165,7 +203,7 @@ function renderMarkdown(string $raw): string {
                 }
                 continue;
             }
-            $cellContent = array_map(fn($c) => inlineMarkdown(htmlspecialchars(trim($c))), $cells);
+            $cellContent = array_map(fn($c) => processInline(trim($c)), $cells);
             if (!$inTable) {
                 if ($pendingHeader === null) {
                     $pendingHeader = $cellContent;
@@ -186,7 +224,7 @@ function renderMarkdown(string $raw): string {
         if ($inList) { $html .= ($listType === 'ul') ? "</ul>\n" : "</ol>\n"; $inList = false; }
         $closeTable();
 
-        $html .= "<p>" . inlineMarkdown(htmlspecialchars($line)) . "</p>\n";
+        $html .= "<p>" . processInline($line) . "</p>\n";
     }
 
     if ($inCodeBlock) {
@@ -198,13 +236,6 @@ function renderMarkdown(string $raw): string {
     if ($inBlockquote) $html .= "</blockquote>\n";
 
     return $html;
-}
-
-function inlineMarkdown(string $text): string {
-    $text = preg_replace('/\*\*(.+?)\*\*/', '<strong>$1</strong>', $text);
-    $text = preg_replace('/\*(.+?)\*/', '<em>$1</em>', $text);
-    $text = preg_replace('/`(.+?)`/', '<code>$1</code>', $text);
-    return $text;
 }
 
 require_once __DIR__ . '/templates/footer.php';

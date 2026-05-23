@@ -231,6 +231,11 @@ a:visited {
     color: #795cb2;
 }
 
+.article-content a[href^="http"]::after {
+    content: " \2192";
+    font-size: 0.75em;
+}
+
 hr {
     border: none;
     border-top: 1px solid #a2a9b1;
