@@ -2,6 +2,6 @@
 
 *Outlink*
 
-A comprehensive archive of Roblox clients, packages, and historical data spanning many years.
+A general roblox archival site
 
 - **URL:** <https://archive.roblonium.com/>

@@ -4,18 +4,18 @@ Downloadable archives, compiled binaries, and tool repositories for Roblox rever
 
 ## Archives
 
-- [CoreScripts 2010–2019](corescripts) — Archived CoreScript files covering nearly a decade of Roblox client updates
-- [RCC Archives](rcc-archives) — Historical RCCService and RBXGS installer files
-- [Roblonium Archive](roblonium-archive) — Comprehensive client and package archive at archive.roblonium.com
-- [RDD Latte Archive](rdd-latte) — Roblox client download archive at rdd.latte.to
-- [Site Templates](site-templates) — Downloadable ZIPs of Roblox website api templates
-- [Ultimate Roblox Mobile Archive](ultimate-mobile-archive) — Browse and download historical iOS and Android clients
-- [GT2 Stuff Archive](gt2-stuff-archive) — Massive (~1–2 TB) GameTest2 client, RCC, and studio archive
+- [CoreScripts 2010–2019](corescripts) — Archive of Roblox CoreScripts from 2010 to 2019
+- [RCC & RBXGS Archives](rcc-archives) — Archived RCCService and RBXGS installers on the Internet Archive.
+- [Roblonium Archive](roblonium-archive) — A general roblox archival site
+- [Roblox Deployment Downloader](roblox-deployment-downloader) — Roblox client download tool and parser that gets client and studio resources from setup.rbxcdn.com.
+- [Site Templates](site-templates) — Roblox API templates for setting up a revival backend.
+- [Ultimate Roblox Mobile Archive](ultimate-mobile-archive) — ROBLOX iOS mobile clients indexer
+- [GT2 Stuff Archive](gt2-stuff-archive) — Massive archive (~1–2 TB) of Roblox gt2 client binaries, RCCService versions, and studio builds.
 
 ## Version References
 
-- [Roblox Version Spreadsheets](version-spreadsheets) — Community-maintained iOS and Android version history with download links
+- [Roblox Version Spreadsheets](version-spreadsheets) — Table with all android and iOS clients versions
 
 ## Tools
 
-- [GT2 Downloader](gt2-downloader) — CLI tool for downloading Roblox clients by version
+- [GT2 Downloader](gt2-downloader) — CLI tool for downloading Roblox clients from GameTest2 endpoint.
