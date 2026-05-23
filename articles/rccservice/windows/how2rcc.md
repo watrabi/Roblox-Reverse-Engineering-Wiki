@@ -6,7 +6,7 @@ RCCService is the server Roblox has used since 2008 to manage game servers and r
 
 ## SOAP Methods
 
-RCCService exposes a WSDL interface with the following methods. Types suffixed with "Ex" return strongly-typed `ArrayOfLuaValue` instead of raw arrays.
+RCCService exposes a [WSDL interface](Resources/RCCService.wsdl) with the following methods. Types suffixed with "Ex" return strongly-typed `ArrayOfLuaValue` instead of raw arrays.
 
 | Method | Parameters | Returns |
 |--------|-----------|---------|

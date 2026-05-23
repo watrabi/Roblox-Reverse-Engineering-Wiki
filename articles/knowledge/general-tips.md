@@ -26,7 +26,7 @@
 | Resource Hacker | Editing string tables in launchers |
 | OpenSSL | Generating RSA key pairs |
 | APKTool | Decompiling/recompiling Android APKs |
-| SoapUI/Insomnia | Sending API requests to RCC |
+| [SoapUI](Resources/SoapUI.exe)/Insomnia | Sending API requests to RCC |
 
 ## Domain Length Rules
 

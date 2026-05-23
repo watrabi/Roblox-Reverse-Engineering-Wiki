@@ -4,7 +4,7 @@
 
 1. Download an RCC version
 2. Start RCC with `-console` argument
-3. Download SoapUI or Insomnia
+3. Download [SoapUI](Resources/SoapUI.exe) or Insomnia
 4. Open SoapUI → localhost/127.0.0.1, port should be pre-set
 5. Select "openjobex" command type
 
@@ -33,5 +33,5 @@ RCC outputs base64 hash → decode to image. For loading a place: `game:Load("rb
 1. Extract RBXGS installer with lessmsi
 2. Download RBXGSConHost
 3. Copy Content folder to main directory
-4. Open SoapUI → RBXGS Mode → IP 127.0.0.1:64989
+4. Open [SoapUI](Resources/SoapUI.exe) → RBXGS Mode → IP 127.0.0.1:64989
 5. Copy Environment ID from console → use in "execute" command

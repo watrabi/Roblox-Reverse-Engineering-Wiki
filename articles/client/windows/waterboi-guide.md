@@ -146,7 +146,7 @@ Tools needed:
 ### Public Key (hardest one yet)
 
 1. Search BGIAA
-2. Generate a key from rbxsigtools (or u already generated)
+2. Generate a key from [rbxsigtools](Resources/rbxsigtool.zip) (or u already generated)
 3. Copy that key from PublicKeyBlob.txt
 4. Right click the very long string in CPU, and hover over "follow in dump" and click the address "Value [any numbers idk]"
 5. Ctrl + E to change a key.
