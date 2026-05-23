@@ -13,8 +13,8 @@ $tree = getArticleTree();
 
 <div class="welcome-box">
     <h1>Welcome to the Roblox Reverse Engineering Wiki</h1>
-    <p>Community-sourced Roblox patching and reverse engineering guides.</p>
-    <p>This wiki contains <strong><?= count($articles) ?></strong> articles covering client patching, RCC service, mobile, network, bytecode, and more.</p>
+    <p>Compilation of ORC Guides and reverse engineering documents, a public project that can be shared over the ORC Community that helps in the process creation of a ROBLOX revival or for private uses.</p>
+    <p>This wiki contains <strong><?= count($articles) ?></strong> articles.</p>
 
     <div class="links">
         <p><a href="guides.zip" class="download-link">Download All Source Guides (ZIP)</a></p>
@@ -35,7 +35,7 @@ $tree = getArticleTree();
 
 <div id="contributors-section">
     <h2 class="collapsed" onclick="var s=this.parentNode;var g=s.querySelector('.contributor-grid');var p=s.querySelector('.contributors-intro');if(g.style.display==='none'){g.style.display='';p.style.display='';this.classList.remove('collapsed')}else{g.style.display='none';p.style.display='none';this.classList.add('collapsed')}">Contributors</h2>
-    <p class="contributors-intro">Hover a name to push others away &middot; Click to see their articles.</p>
+    <p class="contributors-intro">Hover a name to see a contribution.</p>
 
     <div class="contributor-grid" id="contributor-grid">
         <?php

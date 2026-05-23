@@ -51,7 +51,7 @@
     <div class="modal-content">
         <span class="modal-close" onclick="document.getElementById('credits-modal').style.display='none'">&times;</span>
         <h2>Credits</h2>
-        <p>This wiki stands on the work of many contributors. Every article credits its original author(s). Below is the full list.</p>
+        <p>This wiki stands on the work of many contributors. Every article credits its original author(s).</p>
         <h3>Primary Sources</h3>
         <p><?= htmlspecialchars(implode(', ', $creditsPrimarySources)) ?></p>
         <h3>Guide Authors</h3>

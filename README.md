@@ -1,6 +1,6 @@
 # Roblox Reverse Engineering Wiki
 
-Compilation of ORC Guides and reverse engineering documents, a public project that can be shared over the ORC Community that facilitates the creation of a ROBLOX revival or private uses. 
+Compilation of ORC Guides and reverse engineering documents, a public project that can be shared over the ORC Community that helps in the process of the creation of a ROBLOX revival or for private uses. 
 
 ## P.S
 
