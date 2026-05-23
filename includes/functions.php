@@ -9,6 +9,7 @@ function getArticleTree(): array {
         'rccservice' => 'RCCService',
         'studio' => 'Studio',
         'infrastructure' => 'Infrastructure',
+        'resources' => 'Resources',
         'misc' => 'Misc',
         'utilities' => 'Utilities',
         'knowledge' => 'Knowledge',
