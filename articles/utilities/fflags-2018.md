@@ -1,6 +1,6 @@
 # 2018 Client FFlags Reference
 
-*Credits: Roblox (original flags), ORC guide server community (compilation)*
+*Credits: ORC guide server community (compilation)*
 
 Extensive list of FFlags and DFFlags for 2018 Roblox clients.
 

@@ -57,7 +57,7 @@ print("DONE! Replaced " .. replacedProperties .. " properties")
 
 ## Play_Solo.lua
 
-Creates a local player and runs the game solo:
+Creates a local player and runs the game:
 
 ```lua
 game:getService("Players"):CreateLocalPlayer(0);
