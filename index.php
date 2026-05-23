@@ -16,7 +16,7 @@ $tree = getArticleTree();
     <p>Community-sourced Roblox patching and reverse engineering guides.</p>
     <p>This wiki contains <strong><?= count($articles) ?></strong> articles covering client patching, RCC service, mobile, network, bytecode, and more.</p>
 
-    <p><a href="guides.zip" class="download-link">Download All Guides (ZIP)</a></p>
+    <p><a href="guides.zip" class="download-link">Download All Source Guides (ZIP)</a></p>
 
     <div class="stat-box">
         <div class="stat-item">
