@@ -3,7 +3,6 @@ header_remove('X-Powered-By');
 header('X-Content-Type-Options: nosniff');
 header('X-Frame-Options: DENY');
 header('Referrer-Policy: no-referrer');
-header("Content-Security-Policy: default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'");
 header('X-XSS-Protection: 0');
 ?>
 <!DOCTYPE html>

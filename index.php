@@ -2,16 +2,22 @@
 error_reporting(0);
 @ini_set('display_errors', '0');
 require_once __DIR__ . '/includes/functions.php';
+require_once __DIR__ . '/templates/credits.php';
 $pageTitle = 'Main Page';
 require_once __DIR__ . '/templates/head.php';
 require_once __DIR__ . '/templates/header.php';
 
 $articles = getAllArticles();
 $tree = getArticleTree();
+$allCredits = array_merge($creditsPrimarySources, $creditsGuideAuthors, $creditsResourceContributors);
+shuffle($allCredits);
 ?>
 
 <div class="welcome-box">
     <h1>Welcome to the Roblox Reverse Engineering Wiki</h1>
+    <marquee behavior="scroll" direction="left" scrollamount="2"><?= htmlspecialchars(implode(' | ', array_slice($allCredits, 0, 15))) ?></marquee>
+    <marquee behavior="scroll" direction="left" scrollamount="2"><?= htmlspecialchars(implode(' | ', array_slice($allCredits, 15, 15))) ?></marquee>
+    <marquee behavior="scroll" direction="left" scrollamount="2"><?= htmlspecialchars(implode(' | ', array_slice($allCredits, 30))) ?> | and many more anonymous contributors</marquee>
     <p>Community-sourced Roblox patching and reverse engineering guides.</p>
     <p>This wiki contains <strong><?= count($articles) ?></strong> articles covering client patching, RCC service, mobile, network, bytecode, and more.</p>
 
