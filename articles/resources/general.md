@@ -10,6 +10,7 @@ Downloadable archives, compiled binaries, and tool repositories for Roblox rever
 - [RDD Latte Archive](rdd-latte) — Roblox client download archive at rdd.latte.to
 - [Site Templates](site-templates) — Downloadable ZIPs of vintage Roblox website templates
 - [Ultimate Roblox Mobile Archive](ultimate-mobile-archive) — Browse and download historical iOS and Android clients
+- [GT2 Stuff Archive](gt2-stuff-archive) — Massive (~1–2 TB) GameTest2 client, RCC, and studio archive
 
 ## Version References
 

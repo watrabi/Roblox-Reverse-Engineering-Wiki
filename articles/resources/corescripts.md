@@ -1,5 +1,7 @@
 # CoreScripts
 
+*Outlink*
+
 *Description: Archive of Roblox CoreScripts from 2010 to 2019*
 *Credits: lrre.wiki (original documentation)*
 
