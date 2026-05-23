@@ -93,9 +93,13 @@ function restoreLinks(string $text, array $links): string {
     foreach ($links as $i => $link) {
         $placeholder = "\x00" . (is_array($link) ? "MDLINK$i" : "LINK$i") . "\x00";
         if (is_array($link)) {
-            $text = str_replace($placeholder, '<a href="' . htmlspecialchars($link[1]) . '">' . htmlspecialchars($link[0]) . '</a>', $text);
+            $href = htmlspecialchars($link[1]);
+            $class = str_starts_with($link[1], 'Resources/') ? ' class="download-link"' : '';
+            $text = str_replace($placeholder, '<a href="' . $href . '"' . $class . '>' . htmlspecialchars($link[0]) . '</a>', $text);
         } else {
-            $text = str_replace($placeholder, '<a href="' . htmlspecialchars($link) . '">' . htmlspecialchars($link) . '</a>', $text);
+            $href = htmlspecialchars($link);
+            $class = str_starts_with($link, 'Resources/') ? ' class="download-link"' : '';
+            $text = str_replace($placeholder, '<a href="' . $href . '"' . $class . '>' . htmlspecialchars($link) . '</a>', $text);
         }
     }
     return $text;
