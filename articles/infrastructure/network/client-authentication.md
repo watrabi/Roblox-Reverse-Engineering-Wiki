@@ -1,8 +1,8 @@
-# Client Authentication (Tickets)
+# Pre-2017 Client Authentication (Tickets)
 
 *Credits: lrre.wiki (original documentation)*
 
-Client tickets are integral for authenticating clients in the 2016 client.
+Client tickets are integral for authenticating clients in the 2016 client. This is the older format using Unix timestamps and lacking a protocol version suffix — superseded by the post-2017 RSA-SHA1 ticket format (see [Post-2017 Client Authentication](post-2017-client-authentication)).
 
 ## Signature 1 Format
 
