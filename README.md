@@ -2,6 +2,10 @@
 
 Community-sourced Roblox patching and reverse engineering guides, originally compiled from the ORC guide server community and lrre.wiki archives. Sorted and organized into Markdown articles, with articles covering client patching, RCC service, network infrastructure, API endpoints, Android/iOS mobile guides, and archived resources.
 
+## P.S
+
+The site core was sort and written by A.I, it is in a fine-tuning stage and AI Slop removal
+
 ## Credits
 
 This wiki stands on the work of many contributors. Every article credits its original author(s). The main page includes a contributor grid with hover popups linking each person to their articles.
