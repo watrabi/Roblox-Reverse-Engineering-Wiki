@@ -467,24 +467,35 @@ blockquote p {
     color: #54595d;
 }
 
+/* Main Links */
+.links {
+}
+
+.links * {
+    display: inline-block;
+}
+
 /* Download link */
 .download-link {
     display: inline-block;
     padding: 0.5em 1.2em;
-    background: #3366cc;
-    color: #fff;
+    background: #bbddff;
+    border: 1px solid #3366cc;
+    color: #000;
     border-radius: 3px;
     font-weight: bold;
     font-size: 0.95em;
     text-decoration: none;
+    transition: .4s;
 }
 
 .download-link:visited {
-    color: #fff;
+    color: #000;
 }
 
 .download-link:hover {
     background: #447ff5;
+    color: #fff;
     text-decoration: none;
 }
 
