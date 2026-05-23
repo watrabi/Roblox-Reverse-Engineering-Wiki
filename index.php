@@ -30,22 +30,24 @@ $tree = getArticleTree();
     </div>
 </div>
 
-<h2>Contributors</h2>
-<p class="contributors-intro">Hover over a name to see their contributions.</p>
+<div id="contributors-section">
+    <h2 onclick="var s=this.parentNode;var g=s.querySelector('.contributor-grid');var p=s.querySelector('.contributors-intro');if(g.style.display==='none'){g.style.display='';p.style.display='';this.classList.remove('collapsed')}else{g.style.display='none';p.style.display='none';this.classList.add('collapsed')}">Contributors</h2>
+    <p class="contributors-intro">Hover over a name to see their contributions.</p>
 
-<div class="contributor-grid">
-    <?php foreach ($contributorMapping as $name => $articles): ?>
-    <div class="contributor-card">
-        <div class="contributor-name"><?= htmlspecialchars($name) ?></div>
-        <div class="contributor-popup">
-            <ul>
-                <?php foreach ($articles as $path): ?>
-                <li><a href="<?= htmlspecialchars(contributorPathUrl($path)) ?>"><?= htmlspecialchars(contributorPathTitle($path)) ?></a></li>
-                <?php endforeach; ?>
-            </ul>
+    <div class="contributor-grid">
+        <?php foreach ($contributorMapping as $name => $articles): ?>
+        <div class="contributor-card">
+            <div class="contributor-name"><?= htmlspecialchars($name) ?></div>
+            <div class="contributor-popup">
+                <ul>
+                    <?php foreach ($articles as $path): ?>
+                    <li><a href="<?= htmlspecialchars(contributorPathUrl($path)) ?>"><?= htmlspecialchars(contributorPathTitle($path)) ?></a></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
         </div>
+        <?php endforeach; ?>
     </div>
-    <?php endforeach; ?>
 </div>
 
 <h2>Categories</h2>

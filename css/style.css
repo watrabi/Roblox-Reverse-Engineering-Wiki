@@ -859,6 +859,25 @@ img {
     color: #202122;
 }
 
+/* Collapsible contributors */
+#contributors-section h2 {
+    cursor: pointer;
+    user-select: none;
+}
+
+#contributors-section h2::before {
+    content: '\25BC';
+    display: inline-block;
+    font-size: 0.6em;
+    margin-right: 0.5em;
+    vertical-align: middle;
+    transition: transform 0.15s;
+}
+
+#contributors-section h2.collapsed::before {
+    transform: rotate(-90deg);
+}
+
 /* Contributor grid */
 .contributors-intro {
     color: #54595d;
