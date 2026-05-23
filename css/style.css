@@ -479,6 +479,10 @@ blockquote p {
     text-decoration: none;
 }
 
+.download-link:visited {
+    color: #fff;
+}
+
 .download-link:hover {
     background: #447ff5;
     text-decoration: none;

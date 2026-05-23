@@ -17,6 +17,7 @@ $tree = getArticleTree();
     <p>This wiki contains <strong><?= count($articles) ?></strong> articles covering client patching, RCC service, mobile, network, bytecode, and more.</p>
 
     <p><a href="guides.zip" class="download-link">Download All Source Guides (ZIP)</a></p>
+    <p><a href="https://github.com/Daniel-176/Roblox-Reverse-Engineering-Wiki" class="download-link">Get Site's Source Code(with articles!)</a></p>
 
     <div class="stat-box">
         <div class="stat-item">
