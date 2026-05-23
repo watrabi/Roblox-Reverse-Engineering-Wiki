@@ -1,0 +1,67 @@
+=======<ogrobloxsrc.zip>=======
+by simple the dimple
+hadi helped me compile this shit
+
+so you want to compile block game source 2016??? no? get the fuck out of here.
+well first you need your source. I WILL NOT BE TALKING ABOUT SIXTEENSRC IT'S A SHIT SOURCE
+
+=====<what you need>=====
+you need to setup your source ofc
+you need contribs (the fucking libraries you skid)
+i won't be providing my contribs (aka the one hadi sent me) as i'll be in big trouble
+or just use the shit contribs known as sixteensrc contribs or roblonium
+blockgame src: https://gofile.io/d/QkS1Z1 (i'm gonna be using ogrobloxsrc.zip, but if you have robloxsrc.zip over 800 mb use it)
+mesa: https://cdn.discordapp.com/attachments/1164410155136467034/1236004908461854830/Mesa-7.8.11.7z?ex=66386906&is=66371786&hm=beadf98a52fbf6c137f9b88665317d5058f665fd12612354272d5812a72bf9e5& (for rcc)
+directx9 or the random dll in syswow64: 
+vs 2012 build tools (because yes)
+vs 2019/2022 (to open it)
+
+=====<how 2 set up source>=====
+this should be the same for all sources
+create a folder called Trunk2012 in your root folder (C:/Trunk2012)
+then create two folders, one named Build and the other name Contribs (you can just put them in Trunk2012 it doesn't matter) (C:/Trunk2012/Build, C:/Trunk2012/Contribs)
+export all your contribs into the Contribs folder (boost should look like this: C:/Trunk2012/Contribs/boost_1_56_0)
+if you have to compile them, do so.
+create a system path variable called CONTRIB_PATH (like this: https://web.archive.org/web/20230511202921if_/https://camo.githubusercontent.com/06d461203787f0048526a056aebd4e21a0d6567a91261d5a7b310e6536417756/68747470733a2f2f696d616765732d6578742d322e646973636f72646170702e6e65742f65787465726e616c2f4b77657a5a33337875485972306c5a58597141346370544d564f57646a66436c6452734a775875504245732f68747470732f692e696d6775722e636f6d2f6c3953784776722e706e67) with the contrib path there (mines is C:/Trunk2012/Contribs)
+
+=====<compile deez nuts>=====
+ok so now your source is set up, open the solution file (Client_2012.sln) via vs 2019/2022
+change your build thing from Debug to Release, you're gonna see a project called Log. open properties and go to C/C++ general.
+for some reason the boost directory its: ...\..\depends\boost_1_56_0\include, change it to $(CONTRIB_PATH)\boost_1_56_0\include
+ok now compile, takes like 10 minutes (just for 2 files lol)
+now compile App, there should be no problems.
+
+=====<compile rcc>=====
+now we need to compile rcc, that's easy.
+extract Mesa to the rcc root folder: C:/Trunk2012/Build/RCCService
+ok now go to properties and go to VC++ and replace library dirs with this: $(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSDK_LibraryPath_x86);$(CONTRIB_PATH)\boost_1_56_0\lib;
+
+IMPORTANT!!!
+go to third party and copy the zlib source files adler to zutil, create a new filter in graphics3d (in Rendering) called zlib and paste it there
+go to deflate.cpp and delete line 54 to 55
+change Release to ReleaseRCC and compile, then add https://cdn.discordapp.com/attachments/1209179259952832533/1232492579703095356/libcurl.dll?ex=6638d0e9&is=66377f69&hm=4a29f815ab76071d0eceed53ef9cedb00f339f47178b698544e1af1b2cabfc6e& where the RCC exe is so it's with the dlls
+enjoy your rcc :D
+
+=====<bonues>=====
+so there is a vuln in the source where people can override the cyrpt thing.
+patch by hadi:
+find 
+BYTE signatureRev[10240];
+        for (int i=0; i<signatureLen; ++i)
+            signatureRev[i] = signature[signatureLen - i - 1];
+and replace i<signatureLen with i<signatureLen && i<=10240
+
+ok now use your brain if you want to be a smartass and fix the rest
+
+=====<want to compile other things>=====
+if you get errors follow the common error guide, but if you get an random error contact @dev.meblox
+one more thing you need qt for studio
+ok thx, enjoy your block game source
+
+
+=====<common errors>=====
+warning treated as error - no 'object' file generated: disable treat warnings as errors in C/C++ general
+C:\Trunk2012\Build\CustomBuildRules.targets(45,5): error MSB3721: The command "copy "C:\Trunk2012\Contribs\Qt\4.8.5\win_VS2012\lib\phonon4.pdb" "C:\Trunk2012\Build\RobloxStudio\bin\Release - create fake pdb files and import dlls from other places
+then is not a member of boost::futrue_shared or whatever it's called: add BOOST_THREAD_PROVIDES_FUTURE_CONTINUATION in preprocessor definitions
+fatal error LNK1104: cannot open file 'libboost_system-vc110-mt-1_56.lib': add $(CONTRIB_PATH)\boost_1_56_0\lib; to VC++ library defs
+fatal error LNK1181: cannot open input file 'C:\Trunk2012\Build\App.BulletPhysics\Release\App.BulletPhysics.lib': rebuild whole project 

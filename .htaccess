@@ -1,0 +1,11 @@
+RewriteEngine On
+
+# Block direct access to includes/ and templates/
+RewriteRule ^includes/ - [F,L]
+RewriteRule ^templates/ - [F,L]
+
+# Block access to .md files directly
+RewriteRule \.md$ - [F,L]
+
+# Deny access to hidden files
+RewriteRule (^|/)\. - [F,L]

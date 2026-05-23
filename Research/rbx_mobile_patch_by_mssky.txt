@@ -1,0 +1,40 @@
+-- made by mssky in 2024
+
+-- stuff you need in both ios and android
+
+vscode (or any text editor that can replace strings in every file of the dir)
+
+-- Android
+
+u will need uhhh 
+apktool
+apktool m
+
+sooo
+
+decompile ur apk with apktool (if u dont have a pc then u still can do allat on mobile :shushing_face:, js use apktool m)
+open the decompiled folder in the text editor
+click search (ctrl + shift + f)
+replace roblox.com to urdomain
+move this folder to your android phone 
+compile with apktool m there
+also you can use it to change package name n stuff
+
+-- IOS
+
+rename roblox ipa to zip
+unzip it
+open in the text editor u chose
+replace all roblox.com to urdomain
+now put it back into a zip archive
+rename ur .zip to .ipa
+sideload it
+done
+
+u will also need idkwhatsubdomain.urdomain/device/initialize
+it returns: {"browserTrackerId":0,"appDeviceIdentifier":null}
+
+login api:
+urdomain/login/v1
+register api:
+urdomain/sign-up/v1 (or urdomain/signup/v1 i dont remember)

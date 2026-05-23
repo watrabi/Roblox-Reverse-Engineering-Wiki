@@ -1,0 +1,33 @@
+# Guide
+## You need Visual Studio with c++
+
+### Compilation
+- Download the repo source as zip and extract it somewhere where you would like it to be. I don't mind
+- Open the SLN.
+- Right click on rbxRenderhook in the solution explorer and click properties.
+- Click configuration manager
+- If it says Release, change it to Debug. if it says x64, change it to Win32.
+- Right click rbxRenderhook and press Build.
+- It should produce a folder called Debug. inside there will be rbxRenderhook.dll. Copy that to your client directory
+
+### Adding it to your client
+- Download studPE from https://www.cgsoftlabs.ro/studpe.html
+- Once you have installed it, open it by searching for it in the start menu.
+- Drag RobloxStudio.exe into studpe
+- Press functions
+- Right click in the empty space in the list
+- Press Add New Import
+- Press Dll Select
+- Select the Dll you moved to the client directory
+- Press Select Function
+- There should be 1 function in the list named paracetomol
+- Press OK
+- Press add to list
+- Press add
+- Press OK
+
+**You are done. Enjoy your renders.**
+
+Usage:
+``render("file.png", 768, 432, "http://google.com")``
+It will send a post body of the image to the specified URL and then save to the client directory with the provided file name. If you don't want to post it, just use a random **valid** URL.

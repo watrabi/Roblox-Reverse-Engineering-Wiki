@@ -1,0 +1,43 @@
+new client patching leaked by shikataganai and aep
+
+requirements to follow:
+at least 13 years of age
+a fucking brain
+an rcc that you must get yourself
+
+download this plugin
+https://github.com/buzzer-re/x64dbg-ASLR-Removal/releases/tag/1.0
+
+go to ur x32dbg folder and go to the folder plugins (create the folder if u dont have it) 
+
+drag the plugin in the folder
+
+open roblox in x32dbg
+
+then press Plugins > ASLR  Removal > Remove ASLR
+
+it should create a new file 
+
+rename the file to a .exe 
+
+open the renamed file with -help arg
+
+open x32dbg and attach to the client
+File > Attach
+
+go to memory map and then go to vmpx 
+
+go to the hex editor and find a empty space and put ur urls in like this
+.example.com
+example.com
+
+then select the url that u just put in vmpx right click and then press copy address
+search for roblox urls
+
+double click the string roblox.com 
+
+you find urself at a push instruction for example 0xdeadbeef
+
+press space and with ur copied address replace the 0xdeadbeef
+
+enjoy skiddies

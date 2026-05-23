@@ -1,0 +1,21 @@
+2018L+ Mobile Patching Guide By DoggoITA
+1.Decompile apk
+First Edit All Roblox.com to ur domain in smali
+3.edit public key in libroblox.so
+4.compile apk
+5.if you see connection error you prob need v1/setting/application?applicationName=AndroidApp (2018 and some early versions of 2019 use Setting/QuietGet/AndroidApp)
+6.after you setup fflags you should be able to see the landing page with login and signup buttons
+
+endpoints (lazy to add everything)
+v2/login (in 2019M- the response is different 2019L+ uses a response like the current one)
+v2/signup (in 2019M- the response is different 2019L+ uses a response like the current one)
+alerts/alert-info (it show the alert text in 2019L+)
+
+{
+  "IsVisible": true,
+  "Text": "the text you want",
+  "LinkText": "",
+  "LinkUrl": ""
+}
+
+v1/join-game (used by 2020L/M+ it just act like placelauncher)

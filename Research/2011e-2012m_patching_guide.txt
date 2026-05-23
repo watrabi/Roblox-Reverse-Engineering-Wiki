@@ -1,0 +1,52 @@
+2011e-2012m patching guide
+by valley
+revision 2
+
+i assume you have already patched public key and the site url. if you haven't, there should be plenty of guides on how to do so.
+
+what u need:
+hxd (https://mh-nexus.de/en/hxd)
+x32dbg (https://x64dbg.com)
+
+--- player names and ids
+
+this works for 2011E to 2012M (not robloxplayer). as of 0.35.0.13 (march 8th 2011), name and id changing is implemented differently. this will be patched here
+
+credits to nukley. he found this first (https://nukley.neocities.org/rmod/WIP)
+
+1. open client in x32dbg
+2. in view -> modules, select RobloxApp.exe or the filename of the client
+3. select the symbols tab, click on the client name, type _CxxThrowException and breakpoint it
+4. go back into cpu tab and spam run till you see a window and can interact with it (if you still cannot interact, use a proxy like sodikm in the time period)
+5. go into the roblox window, create a new game (file -> new or click the blank file button) and spam run till you load in
+5.5. if you don't have a command bar at this stage, go into view -> toolbars -> command bar
+6. in the command bar, run this code and them spam run till you can move your mouse in the 3d window:
+
+game.Players:CreateLocalPlayer(0):LoadCharacter()
+
+7. go into players, select your player, then change the name. you'll have to repeat the above steps for the one you dont do.
+7.5. now the game should hang. do NOT spam run at this point
+8. go back into x32dbg, go to the cpu tab, and look in the bottom right. there should be a highlighted area there. double click it
+9. jmp the instruction above it (je, jne or jnz). click run a couple of times and repeat this for the id too.
+
+after you're done with patching name and id, you go to file -> patches (or bandage icon) and save it like so. it cannot be the same name as the running client so name it differently
+
+--- terrain server hosting patch
+
+this works for 2011L to 2012M. these are clients have that have terrain but dont use the later robloxplayer structure
+shoutout to matt :) he tried to gatekeep but i figured it out lol
+
+1. open client in hxd
+2. go into search -> find
+3. search for hex-values: 8B 75 DC C6 45 FC 00 3B (preferably search direction set to all)
+4. the line above the selected region should have E8 .. .. .. 00. you fill that region with 90 in the hex part of the program
+5. save it
+
+--- optional: patch for keyboard so windows key works
+
+idk what client this can help with
+
+1. Search !isKeyboardAcquired
+2. Go to the top one (thats just !isKeyboardAcquired)
+3. Scroll down a bit, you will see a push 5 (seemingly in the middle of nowhere)
+4. Change it to push 6

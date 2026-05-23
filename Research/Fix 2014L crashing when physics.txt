@@ -1,0 +1,12 @@
+Hello guys, it is VMsLover. This took me an hour of debugging and comparing, so I am writing this guide if you have the same issue in 2014L (166, 167, others).
+The issue is, that the player's client crashes as soon as some physics event happens (like unanchored parts).
+How to fix it? Check your host script.
+Find the line
+
+pcall(function() settings().Network.PhysicsSend = Enum.PhysicsSendMethod.ErrorComputation2 end)
+
+in your Lua host script. If it exists, either remove it or comment it like this:
+
+-- pcall(function() settings().Network.PhysicsSend = Enum.PhysicsSendMethod.ErrorComputation2 end)
+
+Now rehost and rejoin and the issue should be fixed.

@@ -1,0 +1,5 @@
+the following guides were sourced from mainly the ORC guide server before the mass erasure, and have no guarantee of working/being good. use them at your own discretion!!!!
+
+i have also included some misc .lua and .json files i also saved before the mass erasue, so maybe you will find those useful too
+happy patching!
+

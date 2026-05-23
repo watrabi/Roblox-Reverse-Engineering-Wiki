@@ -1,0 +1,12 @@
+-----------Mobile Patch Guide----------------
+2016+ mobile guide
+hex editor
+apk decompiler
+text editor
+1 step on smali replace all roblox url with your url
+2 step replace urls in libroblox.so on hex editor
+3 step setup your site
+add a folder called device
+and put this files
+
+for 2014/2015 you need to replace all urls in smali and in libroblox but you need to change urls in roblox settings located in a folder in res too

@@ -1,0 +1,54 @@
+How to build sixteensrc (Client and RCC)
+Thanks dxf for explain a lot of stuff
+
+req : 
+Visual Studio 2012 (only build tools needed) : https://drive.google.com/file/d/1BtDEgqeN29aX3NdwGf9_2n-aFvguE9dL/view?usp=sharing
+sixteensrc lol : https://mega.nz/file/c0g3SLZb#S0QrQ6gQq94UEAJrfTogQvl438nH068-5r59WYAiD28
+Contrib : https://mega.nz/file/Ev8HjRKK#U1r1tGl3y67APhajBz3TIPHm_016lfD-FNwW4zE4UTo
+Mesa (needs for rcc) : https://cdn.discordapp.com/attachments/1164410155136467034/1236004908461854830/Mesa-7.8.11.7z?ex=66386906&is=66371786&hm=beadf98a52fbf6c137f9b88665317d5058f665fd12612354272d5812a72bf9e5&
+A fucking brain (I dont have it but dxf helped me)
+
+okay... lets go
+
+first go to C: then create folder "Trunk2012"
+after extract sixteen src in folder and name it "Build"
+
+create other folder in "Trunk2012" and name it "Contrib2"
+extract contribs into this folder.
+
+Make a new system variable and call it CONTRIB_PATH with the value being the path of your contrib2 folder
+
+Open src in vs 2019 and change everything to use v110 build tools (inside of rendering folder and 3rd party folder too)
+Change build from "Debug" to "Release" (if you to building RCC change to ReleaseRCC)
+
+Build APP first then WindowsClient 
+if you have error while building app 
+if your error something like "Cannot open include file : 'boost/thread/mutex.hpp': No Such file or directory"
+right click Log, properties, VC++ directories, additional include directories and add "$(CONTRIB_PATH)\boost_1_56_0"
+
+if you have errors while building WindowsClient 
+if your error something like "warning treated as error - no 'object' file generated" then
+Right click project Properties, C/C++ Disable treat warning as error
+if error "cannot open file 'libboost_program_options bla bla bla'" then
+project properties
+VC++ directories, additional library directories
+add into it $(CONTRIB_PATH)\boost_1_56_0\lib
+
+Now rendering shit "open 3rd party folder" then open zlib select all files, copy them
+
+open rendering folder 
+add new filter in graphics3D and call it zlib
+then paste all of the files in there
+the last step is to go to deflate.c and delete line 54 and 55, rebuild graphics3D then build WindowsClient
+
+
+Building RCC 
+uh... if you have errors try 
+project properties
+VC++ directories, additional library directories
+add into it $(CONTRIB_PATH)\boost_1_56_0\lib
+aslo extract Mesa into rccservice folder
+
+So if you have brain you can build this.
+
+Made by ___________ + dxf helped me with fix errors

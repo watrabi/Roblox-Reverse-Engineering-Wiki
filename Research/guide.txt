@@ -1,0 +1,15 @@
+How to compile robloxsrc.zip (Client, Studio and RCC)
+This guide is straight forward if you have worked with Visual Studio before and know how to code. If you don't then don't compiled it.
+This guide (unless it has been leaked) should be with the correct files. Extract Trunk2012 into your C:\
+get Visual Studio 2022 select every file and change them to work with v110. If you don't see this option open the visual studio 2012 iso
+that is with this guide. Just download Visual Studio 2012. Afterwards you should see the option make sure you put all of them to compile with v110.
+Turn off treat warnings as errors because this will not allow you to compile the source. Make sure you are building in Release for the Client and 
+ReleaseRCC for the RCC and ReleaseStudio for the Studio. Code out any vulnerabilities in the code. If you don't know how to code then do not use the source.
+Only use RobloxPlayerBeta.exe if you are sharing it you can use the RobloxPlayerBetaRaw.exe too though its less secure, so probably don't share it.
+You will also need to edit your system environment so basically just add CONTRIB_PATH and set the path to C:\Trunk2012\Contribs
+For Graphics3D just copy everything from a - z from the zlib folder in rendering to the Graphics3D make sure you create a new filter and call it zlib then paste it in ther
+If you get libboost issues goto linker and add additional libraries and put this there $(CONTRIB_PATH)\boost_1_56_0\lib
+
+Thats it don't host this code until you patch out the rce's and other shit
+
+Protip Crypt

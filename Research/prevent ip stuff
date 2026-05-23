@@ -1,0 +1,12 @@
+prevent ip stuff 
+open robloxapp in x32dbg
+go to symbols
+select robloxapp
+click string search, all modules
+search "connection accepted", "connection from", "lost connection from", "Disconnect from" one at a time.
+double click on it
+right click -> follow in dump -> robloxapp.(random offset)
+select the %s at the end of the string (ex:connection from %s)
+replace %s with null bytes "00" in dump.
+do the same thing for the others.
+

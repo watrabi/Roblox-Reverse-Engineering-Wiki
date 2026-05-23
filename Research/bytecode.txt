@@ -1,0 +1,43 @@
+-how to patch bytecode/binary string in 2007-2009-
+-client being used for this tutorial: 0.3.809.0 (2008M)-
+
+-how to test to see if your client is vulnerable to bytecode-
+open your client and open a new place (ctrl+n)
+if you don't have the output and command bar already out, open them 
+through view->output and view->toolbars->command
+paste into the console your test case, mine would be
+loadstring("\27\76\117\97\81\0\1\4\4\4\8\0\14\0\0\0\76\117\97\67\88\88\32\83\111\117\114\99\101\0\1\0\0\0\1\0\0\0\0\0\0\4\4\0\0\0\5\0\0\0\65\64\0\0\28\64\0\1\30\0\128\0\2\0\0\0\4\6\0\0\0\112\114\105\110\116\0\4\4\0\0\0\97\98\99\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0")()
+if you are using mine, it should return abc if unpatched
+if it returns an error regarding "attempt to call a nil value", then it's already patched
+
+-how to actually patch this-
+open your client with x32dbg (right click on your client in file explorer->Debug with x64dbg)
+in the top tab with the logos and text (not the one with just text or just logos), go to symbols
+double click the module (left side of screen next to base/memory addresses) which should be "roblox.exe" if untampered with, or whatever you changed the name to if you did
+now you should be met with the screen that you saw originally, this is called the disassembler
+although it doesn't look like much has changed, it's simply just narrowed down
+what we want to do next is go to the toolbar above the one with the text and logos, it should just be logos
+we want to click on the little A₂ symbol next to the remote-looking symbol towards the right end of the toolbar
+once you are on the new screen, known as the strings screen, we can search for the label set as "binary string"
+which marks as a checkpoint where the decompiled assembly for that label is found
+the input to search for this label is at the bottom of your screen, above the Command input and region search progress bar
+type in binary string, then double click on any part of the highlighted area, it really doesn't matter which part
+now we are back at the disassembler, we see quite a bit of assembly code, but the one thing we are focusing on isn't something we can completely see yet
+this one thing we want to focus on right now is called a subroutine, basically meaning that it mentions an address that leads to code that might be used more than just once
+as we can see there are 2 things that are highlighted that we can see immediately, the jmp instruction and the call instruction
+the jmp instruction isn't what we are looking for unfortunately, so we will skip to the call instruction, which basically just calls the code behind the memory address referenced
+the equivalent of call roblox.MEMORYADDRESS in most languages is just by referencing a function like function() or object::function();
+one thing you can do to see what is behind this memory address, is just by double clicking it, which will bring us to the referenced address via disassembler
+once you do that, you should be met with sub esp,18 which is really all we need since this function can be shorted by a simple instruction
+the simple ret instruction stands for return, and what the computer will see compiling this with the ret instruction is just a function with the instruction in it, and nothing further
+which will allow us to be able to prevent it from being executed via loadstring
+now in order to insert this ret instruction that we have been talking about for so long, simply press the spacebar (as long as sub esp,18 is selected)
+then replace sub esp, 0x18 to simply just ret
+once you have done this, go to to the toolbar with just the logos and press the bandaid logo (which means patch)
+in this little screen we have up now you can see all the patches you've made along with whic h modules they are in
+since we've only made a patch in the roblox.exe module, that's all we will see
+now simply press Patch File and set the file name to whatever you'd like, but end it in .exe so it stays an application
+
+-end-
+now go ahead and open the patched exe and use the same test case
+make sure it errors and the usual error should be "attempt to call a nil value"

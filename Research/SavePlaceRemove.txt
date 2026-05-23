@@ -1,0 +1,10 @@
+Remove "Save changes to Place1?" dialog box!
+
+First, you need to open your joinscript in any kind of a text editing app. Then add this line after creating a player but before setting it's name:
+
+game:service("Visit"):SetUploadUrl("")
+
+Save your joinscript. Then open x32dbg and open your RobloxApp exe in it. Go to symbols, double-click your current app name and press the "Az" button. It should bring you to the "References" tab. Wait a little until it's finished and search for "SetUploadUrl". Double click the search result. Now, somewhere near it (in my case it's 2 instructions above the push with the SetUploadUrl) you should find a "push 5" instruction. Press spacebar on your keyboard, and change "push 0x05" to "push 0x00" in the appeared window. Click "File" > "Patch file..." and save your patched exe file.
+Now, join a game using your edited joinscript and the dialog box shouldn't appear when you close the client. Have fun!
+
+Made with ❤️ by SomeoneInTheWorld.

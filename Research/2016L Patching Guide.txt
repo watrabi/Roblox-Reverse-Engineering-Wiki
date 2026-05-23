@@ -1,0 +1,46 @@
+2016L guide
+no site tho
+do this for both rcc and player btw
+
+invalid request 5
+1. search invalid request 5
+2. double clcok
+3. go up until you see a jne or whatever it is
+4. jmp it
+
+remotesysstat
+1. string search sysstats
+2. double click "Players::onRemoteSysStats disconnect"
+3. jmp both jne and je, then change push 1 to push 0
+4. go back to the References tab
+5. double click "Players::onRemoteSysStats disconnect not in the clist"
+6. first jmp the je above it
+7. then jmp the jne above it
+8. change push 1 to push 0
+
+analytics
+1. search analytics and then look for and double click the one thats just "analytics"
+2. go up until you see something with "game" next to it
+3. jmp the jne on top of game
+----------------------------------
+thats it for x32dbg. save the file and then we do hxd
+----------------------------------
+btw still do this for both rcc and player
+public key
+1. open hxd
+2. search for bgiaa
+3. replace that big string with whats in publickeyblob.txt
+
+domain
+go to the very first letter in the file and then replace all references of roblox.com to your domain (IT MUST BE 10 CHARS LONG)
+btw change the domain in appsettings.xml too
+
+-----------------------------------
+we are still in hxd but only do this for rccservice
+-----------------------------------
+in hxd search for 00 00 00 00 00 c0 82 40 and change to 00 00 f8 1f 5f a0 02 42 
+if u dont it will only run for 10 mins then it will stop accepting connections'
+
+versioncompatibility
+1. look up versioncompatibility
+2. replace it with 00's in hex

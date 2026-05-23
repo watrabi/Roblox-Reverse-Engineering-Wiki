@@ -1,0 +1,29 @@
+**not meant for a revival, just learn from this or use this to test**
+1. download a rcc (archive.roblonium.com has 2015+ archive.org has 2007-2008)
+2. use cmd/bat to navigate and start the rcc app with `-console`
+3. once started, download soapui (can be found in <#1247332138995552307>)
+4. open soap ui, localhost/127.0.0.1, roblox.com, and the right port should already be set
+5. select openjobex for the command type and in the script box paste in a script based on your rcc:
+
+2007/8:
+```lua
+game.Players:CreateLocalPlayer(0)
+game.Players.Player:LoadCharacter()
+print(game:GetService("ThumbnailGenerator"):Click("PNG", 500, 500, true))
+```
+
+2015+:
+```lua
+game:GetService("ContentProvider"):SetBaseUrl("http://www.roblox.com")
+game:GetService("ScriptContext").ScriptsDisabled = true
+game.Players:CreateLocalPlayer(0)
+game.Players.Player1:LoadCharacter()
+print(game:GetService("ThumbnailGenerator"):Click("PNG", 500, 500, true))
+```
+
+if u want to load a place just do `game:Load("rbxasset://place.rbxl")`. the rbxl file should be located in your rcc's content folder in this example, but you can use urls aswell, only http:// works i believe, not https://
+
+your rcc window should spit out a long base64 hash, copy that and paste it onto a base64 decoder site and decode it to an image, there you have your render
+
+obviously revivals automate all these actions in the backend but it's up to you how you do that
+if you want to add accessories/body colors to ur character just download the accessory/body color object as xml files and then set Player.CharacterAppearance to be the path to each file seperated by semi colons (;)

@@ -1,0 +1,132 @@
+Powdered's Patching Guide
+Information
+
+You will need
+
+    A brain
+
+    x32dbg (x64dbg will not work, but the installer thing that includes x32dbg will)
+
+    HxD or any hex editor you know (i choose HxD because simplicity)
+
+    A 10-letter domain name and website. You can patch clients with longer domain names, but that's complicated and the method i used will NOT work with longer domain names or shorter.
+
+    RBXSigTools (If you know who made this or you made this, comment it and i will credit)
+
+PC:
+
+This guide is very insecure if you don't use roblox player beta, and probably if you do. I am not responsible for any exploitings of your revival if you skid this guide
+
+    Open your EXE in HxD (drag and drop it in)
+
+    Press CTRL + R to open replace
+
+    Enter roblox.com in search, and in replace enter your domain name (Must be 10 letters!)
+
+    Press Replace all and close the replace prompt. Save the file as HxD likes crashing but leave HXD open.
+
+    Extract RBXSigTools and open KeyGenerator.exe. After it's done, open PublicKeyBlob.txt and copy it's contents(keep the files it's generated for later, you will need them)
+
+    Press CTRL + F to find
+
+    Enter BGIAA and click Search
+
+    In the hex editor bit, replace the entire BGIAA thing with your own Public Key
+
+    Save and close, and then you are done with HxD. Open your executable in x32dbg (drag and drop!)
+
+    Go to symbols, and doubleclick RobloxPlayerBeta.exe in there.
+
+    Click on the [Az] icon in top right corner. You are now in the refrences window.
+
+    Search Invalid Request.
+
+    Doubleclick on every one in order.
+
+    On every single one, there is either a JNE or a JE above the thing to directed you to.
+
+    Click on it once, and press space. Replace jne or je with jmp.
+
+    press ok, and repeat until all are done (Go back to the references tab)
+
+    Search blocking %s
+
+    Double click on it.
+
+    Scroll up a bit, above a few jbs there is a je. Press space on the je and change it to jmp and press ok
+
+    After you are done, press patch and save it as [TYPE OF CLIENT, eg studio, oldstudioplayer, betaplayer]-PATCHED.exe as you cannot overwrite exes for some reason. just go to explorer and delete old exes and rename new ones.
+
+    You are done! Enjoy your 2012 PC Client. Though, there is more steps after this for web, and a optional mobile client if you want
+
+Web:
+
+    You should have a web host set up with your domain name by now. If you don't know how you probably shouldn't be doing this guide.
+
+    Make a folder to put your private keys in, preferrably configured to be non accessible by browser but only php scripts
+
+    Put the files RBXSigTools generated in the folder
+
+    Make a /game/ folder
+
+    make a file called studio.ashx.php (this only works if your host has short php filenames enabled, if they dont, just google how to enable it or something idk i selfhost php)
+
+    In the contents, just copy and paste this except replace berafta.tk with your urls, and /Path/To/Your/Keys/ with your actual key path (You can tell i'm getting lazy)
+
+    Make a file called aqquireamembertoserver.php or whatever (jion is blocked in this subreddit)
+
+    joinscript i made (you can make your own theres a bunch of joinscripts on github or something) (you also need to replace berafta.tk)
+
+    Go to the root directory and make a folder called asset
+
+    basic no database asset script i made (i made this in 2021 when i sucked dont criticise, you should make your own)
+
+    for coregui, i am not giving a guide as i do not know how to get it to work. if you do, comment a solution.
+
+    ok thats my lazy ahh web guide im tired from making the first one and also i woke up at 3am
+
+Mobile:
+
+    Install roblox mobile on your phone (2.4.1 is recommended as there is 13th december studio, player and playerbeta clients archive)
+
+    Open 3utools or whatever
+
+    Go to files section
+
+    Go to User applications
+
+    Wait for app titles to load
+
+    Click on roblox
+
+    Click on roblox.app
+
+    Find info.plist
+
+    Open it and replace roblox.com and m.roblox.com with your domain name (3utools has a built in plist editor, also plist is basically xml except if u open it in normal editor it is encrypted)
+
+    Find robloxmobile with no file name
+
+    Export it to whatever
+
+    open it in HxD
+
+    Replace roblox.com with your domain
+
+    Save and close it as roblox mobile until like 2016 didnt have public keys or anything
+
+    Drag it back into 3utools
+
+    You have patched mobile, but now for web part of it to make it actually work
+
+    for /mobileapi/login, heres what it responds with (make a actual php login script)
+
+    for /games/list its html. if you want to launch a game from it or a page it links to, create a href to /games/start?placeid=1 (its not a actual url on server and it doesnt need to be)
+
+    /games/start launches client and attempts to get info from /game/PlaceLauncher.ashx
+
+    /game/PlaceLauncher.ashx returns this.
+
+    you are done pretty much atleast for games
+
+if theres anything i missed comment it i am very tired i should sleep

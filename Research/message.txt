@@ -1,0 +1,74 @@
+Hey, so this guide will teach you how to fix "Exception occured in Document::executeScript:" error in old clients (2016E and below)
+
+So basically, for some reason, standard joinscript url (/game/join.ashx) is hardcoded inside the joinscript client uses to join.
+This error occurs if you have a custom joinscript url (example: /scripts/join/), so yeah, just move your joinscript to /game/join.ashx url.
+Then, pass the /game/join.ashx url into "-j" arg and the client should join.
+
+Enjoy!
+epic guide for gamepasses n shit by zfut
+discord: krooooooos
+
+The first thing you need is /Login/Negotiate.ashx to get the account cookie. For example, when you start your client, it will be -a "http://yourdomain.com/Login/Negotiate.ashx" -j "thejoinscript" -t "theticket". Negotiate.ashx will do $_GET['suggest'] and return the ROBLOSECURITY, giving cookies to access the account. Example:
+setcookie(".ROBLOSECURITY", "YOURROBLOSECURITY", time() + (460800* 30), "/", '.yourdomain.com');
+The negotiate system just needs to give the cookies and echo it, nothing else.
+
+So the second thing, you need /marketplace/productinfo?assetId=gamepassid, it's needed so the client gets the info of the gamepass. Example:
+{
+    "TargetId": 721239,
+    "ProductType": "Game Pass",
+    "AssetId": 179997786,
+    "ProductId": 83062169,
+    "Name": "Theme Colors",
+    "Description": "(Use this pass by going into the Options.) This Gamepass allows you to change the Flooding Waters around you into Lava, Acid and more! It also changes the look for your Menus to the same color!",
+    "AssetTypeId": 0,
+    "Creator": {
+        "Id": 247535,
+        "Name": "Crazyblox",
+        "CreatorType": "User",
+        "CreatorTargetId": 247535,
+        "HasVerifiedBadge": true
+    },
+    "IconImageAssetId": 179997713,
+    "Created": "2017-06-15T08:27:39.693Z",
+    "Updated": "2017-06-15T08:27:39.693Z",
+    "PriceInRobux": 45,
+    "PriceInTickets": null,
+    "Sales": 0,
+    "IsNew": false,
+    "IsForSale": true,
+    "IsPublicDomain": false,
+    "IsLimited": false,
+    "IsLimitedUnique": false,
+    "Remaining": null,
+    "MinimumMembershipLevel": 0,
+    "ContentRatingTypeId": 0,
+    "SaleAvailabilityLocations": null,
+    "SaleLocation": null,
+    "CollectibleItemId": null,
+    "CollectibleProductId": null,
+    "CollectiblesItemDetails": null
+}
+(Epic productinfo)
+///
+///
+(Epic productinfo)
+
+The third thing is you need /currency/balance, it will return the total balance you have in your account. Example:
+{"robux": 123123}
+I will just give an example of robux because only one currency is better.
+
+How it works?
+
+The client will request the productinfo and balance first, and will request /marketplace/purchase if you accept the purchase.
+
+What purchase will do:
+
+The requestPlaceId will be locationId ($_POST['locationId']) or placeId ($_POST['placeId']). The productId will be productId ($_POST['productId']) and the price will be purchasePrice ($_POST['purchasePrice']).
+
+When you finish everything and succeed, it needs to return: {"success":"true","status":"Bought","receipt":"the receipt can be a hashed string to store purchases"}
+Else, you need to return: {"success":"false","status":"Error","receipt":null,"message":null}
+
+For the gamepass owned check:
+The game will request /ownership/hasasset?userId=userid&assetId=gamepassid OR /Game/GamePass/GamePassHandler?userId=userid&assetId=gamepassid. If the player owns it, return 1, else return 0.
+
+Hope you understand it, I won't write any code for you, check out void source if you don't understand: https://github.com/ethanm2502/void
