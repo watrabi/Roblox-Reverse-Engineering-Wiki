@@ -39,7 +39,8 @@ $description = extractDescription($mdFile);
 require_once __DIR__ . '/templates/head.php';
 require_once __DIR__ . '/templates/header.php';
 
-$html = renderMarkdown($raw);
+[$before, $tabHtml, $after, $hasTabs] = renderWithTabs($raw);
+$html = renderMarkdown($before) . $tabHtml . renderMarkdown($after);
 echo '<div class="article-content">';
 if ($description) {
     echo '<div class="article-description">' . htmlspecialchars($description) . '</div>';
@@ -48,6 +49,11 @@ echo $html;
 echo '</div>';
 
 echo '<hr><p><a href="index.php">&larr; Back to Main Page</a></p>';
+
+if ($hasTabs) {
+echo '<script src="js/tabs.js"></script>';
+}
+
 
 function sanitizeArticlePath(string $input): ?string {
     if ($input === '') return null;
@@ -107,6 +113,66 @@ function processInline(string $raw): string {
     $escaped = htmlspecialchars($withPlaceholders);
     $rendered = inlineMarkdown($escaped);
     return restoreLinks($rendered, $links);
+}
+
+function renderWithTabs(string $raw): array {
+    if (!str_contains($raw, '*Tabs*')) return [$raw, '', '', false];
+    $before = '';
+    $after = '';
+    $tabLabels = [];
+    $tabContents = [];
+    $tabBuffer = '';
+    $inTabs = false;
+    $tabsDone = false;
+    $lines = explode("\n", $raw);
+
+    foreach ($lines as $line) {
+        $trimmed = trim($line);
+        if ($trimmed === '*Tabs*') {
+            $inTabs = true;
+            $tabLabels = [];
+            $tabContents = [];
+            $tabBuffer = '';
+            continue;
+        }
+        if ($trimmed === '*TabsEnd*') {
+            if (trim($tabBuffer) !== '') $tabContents[] = $tabBuffer;
+            $inTabs = false;
+            $tabsDone = true;
+            continue;
+        }
+        if ($inTabs) {
+            if (preg_match('/^##\s+(.+)/', $line, $m)) {
+                if (trim($tabBuffer) !== '') $tabContents[] = $tabBuffer;
+                $tabLabels[] = trim($m[1]);
+                $tabBuffer = '';
+            } else {
+                $tabBuffer .= $line . "\n";
+            }
+        } elseif (!$tabsDone) {
+            $before .= $line . "\n";
+        } else {
+            $after .= $line . "\n";
+        }
+    }
+
+    $tabHtml = '';
+    if (!empty($tabLabels)) {
+        $tabHtml .= '<div class="tab-container"><div class="tab-nav">';
+        foreach ($tabLabels as $i => $label) {
+            $active = $i === 0 ? ' active' : '';
+            $escaped = htmlspecialchars($label, ENT_QUOTES, 'UTF-8');
+            $tabHtml .= '<button class="tab-btn' . $active . '" data-tab="' . $i . '">' . $escaped . '</button>';
+        }
+        $tabHtml .= '</div>';
+        foreach ($tabContents as $i => $content) {
+            $active = $i === 0 ? ' active' : '';
+            $tabHtml .= '<div class="tab-panel' . $active . '" data-tab="' . $i . '">' . renderMarkdown($content) . '</div>';
+        }
+        $tabHtml .= '</div>';
+    }
+
+    return [$before, $tabHtml, $after, true];
 }
 
 function renderMarkdown(string $raw): string {

@@ -1,11 +1,38 @@
-# Post-2017 Client Authentication (RSA-SHA1 Ticket)
+# Client Tickets
 
-*Description: RSA-SHA1 signed ticket used by Roblox clients for server authentication, circa 2017+*
-*Credits: (community source)*
+*Description: Client ticket formats and authentication — covering pre-2017 and 2018+ protocols*
+*Credits: lrre.wiki (original documentation), (community source)*
 
-The client ticket is a multi-part signed token generated server-side and passed to the Roblox client to authenticate a join request. It supersedes the older [Pre-2017 Client Authentication](client-authentication) format by adding a protocol version suffix and using a formatted date string instead of a Unix timestamp.
+*Tabs*
+## < 2017
 
-## Format
+Client tickets are integral for authenticating clients in the 2016 client. This is the older format using Unix timestamps and lacking a protocol version suffix.
+
+### Format
+
+Entries are newline-delimited, each signature SHA-1 signed:
+
+`UnixTimestamp;Signature1(SHA-1+Base64);Signature2(SHA-1+Base64)`
+
+Must use `SetIsPlayerAuthenticationRequired(true)` on NetworkServer to enable.
+
+### Signature 1
+
+| User ID | Username | CharacterAppearance URL | Job ID | Unix Timestamp |
+|---------|----------|--------------------------|--------|-----------------|
+| `1` | `player1` | `"-"` | `1` | `1138516781` |
+
+### Signature 2
+
+| User ID | Job ID | Unix Timestamp |
+|---------|--------|-----------------|
+| `1` | `1` | `1138516781` |
+
+## 2018+
+
+The client ticket is a multi-part signed token generated server-side and passed to the Roblox client to authenticate a join request. It supersedes the older format by adding a protocol version suffix and using a formatted date string instead of a Unix timestamp.
+
+### Format
 
 ```
 {timestamp};{sig};{sig2};2
@@ -18,7 +45,7 @@ The client ticket is a multi-part signed token generated server-side and passed 
 | `sig2` | RSA-SHA1 signature of `{id}\n{jobid}\n{timestamp}` |
 | `2` | Protocol version indicator |
 
-## Fields
+### sig Payload
 
 | Field | Description |
 |-------|-------------|
@@ -28,7 +55,17 @@ The client ticket is a multi-part signed token generated server-side and passed 
 | `jobid` | Job/game instance identifier |
 | `timestamp` | Generation timestamp |
 
-## Implementation (PHP)
+### sig2 Payload
+
+| Field | Description |
+|-------|-------------|
+| `id` | User ID |
+| `jobid` | Job/game instance identifier |
+| `timestamp` | Generation timestamp |
+
+Example: `1 | 1 | 1138516781`
+
+### Implementation (PHP)
 
 ```php
 function GenerateClientTicket($id, $name, $charapp, $jobid) {
@@ -48,19 +85,13 @@ function GenerateClientTicket($id, $name, $charapp, $jobid) {
 }
 ```
 
-## Private Key
+### Private Key
 
 The signing key is expected at `{docroot}/keys/rbxsig2_private.pem` in PEM format. The corresponding public key (`rbxsig2_public.pem`) is embedded in the Roblox client binary for ticket verification.
 
-## Signature Payloads
+Both signatures use RSA with SHA-1 (`OPENSSL_ALGO_SHA1`).
 
-**sig** covers all five fields: `{id}\n{name}\n{charapp}\n{jobid}\n{timestamp}`
-
-**sig2** covers three fields: `{id}\n{jobid}\n{timestamp}`
-
-Both use RSA with SHA-1 (`OPENSSL_ALGO_SHA1`).
-
-## Client Verification
+### Client Verification
 
 The Roblox client:
 1. Parses the ticket on `;` delimiter
@@ -69,11 +100,12 @@ The Roblox client:
 4. Checks the protocol version suffix (`2`)
 
 A failed signature check results in the client rejecting the connection.
+*TabsEnd*
 
-## Key Differences from Pre-2017 Format
+## Key Differences
 
-| Aspect | Pre-2017 | Post-2017 |
-|--------|----------|-----------|
+| Aspect | < 2017 | 2018+ |
+|--------|--------|-------|
 | Timestamp | Unix epoch | `n/j/Y g:i:s A` string |
 | Algorithm | SHA-1 | RSA-SHA1 (asymmetric) |
 | Protocol version | None | `;2` suffix |
