@@ -34,11 +34,16 @@ $raw = file_get_contents($mdFile);
 preg_match('/^# (.+)$/m', $raw, $titleMatch);
 $pageTitle = $titleMatch[1] ?? ucwords(str_replace(['-', '_'], ' ', basename($path)));
 
+$description = extractDescription($mdFile);
+
 require_once __DIR__ . '/templates/head.php';
 require_once __DIR__ . '/templates/header.php';
 
 $html = renderMarkdown($raw);
 echo '<div class="article-content">';
+if ($description) {
+    echo '<div class="article-description">' . htmlspecialchars($description) . '</div>';
+}
 echo $html;
 echo '</div>';
 
@@ -147,6 +152,11 @@ function renderMarkdown(string $raw): string {
             if ($inBlockquote) { $html .= "</blockquote>\n"; $inBlockquote = false; }
             if ($inList) { $html .= ($listType === 'ul') ? "</ul>\n" : "</ol>\n"; $inList = false; }
             $html .= "<br>\n";
+            continue;
+        }
+
+        if (str_starts_with($trimmed, '*Description:')) {
+            if ($inList) { $html .= ($listType === 'ul') ? "</ul>\n" : "</ol>\n"; $inList = false; }
             continue;
         }
 

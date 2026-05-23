@@ -2,6 +2,8 @@
 
 *Credits: lrre.wiki (original documentation)*
 
+*Description: Historical Roblox vulnerabilities including critical loadstring, chat crash, and signature bypass issues.*
+
 ## Vulnerability Table
 
 | Vulnerability | Affects | Patched | Severity |

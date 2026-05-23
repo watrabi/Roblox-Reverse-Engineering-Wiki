@@ -34,7 +34,7 @@ $tree = getArticleTree();
 <div class="category-grid">
     <?php foreach ($tree as $cat => $info): ?>
     <div class="category-card">
-        <h3><?= htmlspecialchars($info['label']) ?></h3>
+        <h3><a href="category.php?cat=<?= htmlspecialchars($cat) ?>"><?= htmlspecialchars($info['label']) ?></a></h3>
         <?php foreach ($info['subs'] as $sub => $sinfo): ?>
         <h4><?= htmlspecialchars($sinfo['label']) ?></h4>
         <ul>

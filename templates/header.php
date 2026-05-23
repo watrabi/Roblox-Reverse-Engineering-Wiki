@@ -19,9 +19,9 @@
         <ul class="sidebar-nav sidebar-cats">
             <?php
             $tree = getArticleTree();
-            foreach ($tree as $cat => $info):
+            foreach ($tree as $catKey => $catInfo):
             ?>
-            <li><a href="index.php#<?= htmlspecialchars($cat) ?>"><?= htmlspecialchars($info['label']) ?></a></li>
+            <li><a href="category.php?cat=<?= htmlspecialchars($catKey) ?>"><?= htmlspecialchars($catInfo['label']) ?></a></li>
             <?php endforeach; ?>
         </ul>
         <hr>

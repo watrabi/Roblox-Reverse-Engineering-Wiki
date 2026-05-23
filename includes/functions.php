@@ -41,13 +41,16 @@ function getArticleTree(): array {
                 if (!str_ends_with($sub, '.md')) continue;
                 $name = pathinfo($sub, PATHINFO_FILENAME);
                 $title = ucwords(str_replace(['-', '_'], ' ', preg_replace('/^\d+-/', '', $name)));
-                $outlink = str_contains(file_get_contents($subPath), '*Outlink*');
+                $content = file_get_contents($subPath);
+                $outlink = str_contains($content, '*Outlink*');
+                $desc = extractDescription($subPath);
                 $path = urlencode("$cat/$name");
                 $tree[$cat]['subs']['_root'][] = [
                     'file' => $sub,
                     'title' => $title,
                     'url' => "article.php?path=$path",
                     'outlink' => $outlink,
+                    'description' => $desc,
                 ];
                 continue;
             }
@@ -58,13 +61,17 @@ function getArticleTree(): array {
                 if ($f[0] === '.' || !str_ends_with($f, '.md')) continue;
                 $name = pathinfo($f, PATHINFO_FILENAME);
                 $title = ucwords(str_replace(['-', '_'], ' ', preg_replace('/^\d+-/', '', $name)));
-                $outlink = str_contains(file_get_contents($subPath . '/' . $f), '*Outlink*');
+                $fp = $subPath . '/' . $f;
+                $content = file_get_contents($fp);
+                $outlink = str_contains($content, '*Outlink*');
+                $desc = extractDescription($fp);
                 $path = "$cat/$sub/$name";
                 $articles[] = [
                     'file' => $f,
                     'title' => $title,
                     'url' => "article.php?path=" . urlencode($path),
                     'outlink' => $outlink,
+                    'description' => $desc,
                 ];
             }
 
@@ -147,5 +154,28 @@ function getCategoryIcon(string $cat): string {
 }
 
 function getSubIcon(string $sub): string {
+    return '';
+}
+
+function extractDescription(string $filePath): string {
+    $content = file_get_contents($filePath);
+    $lines = explode("\n", $content);
+    foreach ($lines as $line) {
+        $trimmed = trim($line);
+        if ($trimmed === '' || str_starts_with($trimmed, '#') || str_starts_with($trimmed, '*Outlink*') || str_starts_with($trimmed, '*Credits:') || str_starts_with($trimmed, '|') || str_starts_with($trimmed, '-') || str_starts_with($trimmed, '>')) {
+            continue;
+        }
+        if (str_starts_with($trimmed, '*Description:')) {
+            return trim(substr($trimmed, strlen('*Description:')));
+        }
+        $desc = strip_tags($trimmed);
+        $desc = preg_replace('/\*\*(.+?)\*\*/', '$1', $desc);
+        $desc = preg_replace('/\*(.+?)\*/', '$1', $desc);
+        $desc = preg_replace('/`(.+?)`/', '$1', $desc);
+        $desc = preg_replace('/\[([^\]]+)\]\([^)]+\)/', '$1', $desc);
+        $desc = preg_replace('/<[^>]+>/', '', $desc);
+        if (strlen($desc) > 150) $desc = substr($desc, 0, 147) . '...';
+        return trim($desc);
+    }
     return '';
 }

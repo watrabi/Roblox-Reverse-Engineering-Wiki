@@ -2,6 +2,8 @@
 
 *Credits: Compiled from the works of meditation, Powdered, waterboi, Jetray, Aep, Karma, valley, nukley, h6di, VMsLover, shikataganai, mssky, DoggoITA, ARC, zfut, SomeoneInTheWorld, Atomic, dxf, katoe_real, simple the dimple, hadi, and the entire ORC guide server community.*
 
+*Description: Common patches, tools and domain length rules for Roblox client modification.*
+
 ## Common Patches Summary
 
 - **Domain replacement** → HxD: roblox.com → your domain (10 chars)

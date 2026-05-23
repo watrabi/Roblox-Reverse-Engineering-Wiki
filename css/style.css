@@ -178,6 +178,16 @@ body {
     max-width: 880px;
 }
 
+.article-description {
+    background: #f0f5ff;
+    border: 1px solid #c8ccd1;
+    border-radius: 3px;
+    padding: 0.6em 1em;
+    margin-bottom: 1em;
+    font-size: 0.9em;
+    color: #54595d;
+}
+
 /* Typography */
 h1, h2, h3, h4 {
     font-family: 'Linux Libertine', 'Georgia', 'Times', serif;
@@ -553,6 +563,15 @@ img {
 .article-list .article-meta-sm {
     color: #54595d;
     font-size: 0.85em;
+}
+
+.article-list .article-title .outlink {
+    color: #2d7d2d;
+}
+
+.article-list .article-title .outlink::after {
+    content: " \2192";
+    font-size: 0.75em;
 }
 
 /* Search results */
