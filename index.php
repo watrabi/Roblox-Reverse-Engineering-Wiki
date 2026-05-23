@@ -9,15 +9,10 @@ require_once __DIR__ . '/templates/header.php';
 
 $articles = getAllArticles();
 $tree = getArticleTree();
-$allCredits = array_merge($creditsPrimarySources, $creditsGuideAuthors, $creditsResourceContributors);
-shuffle($allCredits);
 ?>
 
 <div class="welcome-box">
     <h1>Welcome to the Roblox Reverse Engineering Wiki</h1>
-    <marquee behavior="scroll" direction="left" scrollamount="2"><?= htmlspecialchars(implode(' | ', array_slice($allCredits, 0, 15))) ?></marquee>
-    <marquee behavior="scroll" direction="left" scrollamount="2"><?= htmlspecialchars(implode(' | ', array_slice($allCredits, 15, 15))) ?></marquee>
-    <marquee behavior="scroll" direction="left" scrollamount="2"><?= htmlspecialchars(implode(' | ', array_slice($allCredits, 30))) ?> | and many more anonymous contributors</marquee>
     <p>Community-sourced Roblox patching and reverse engineering guides.</p>
     <p>This wiki contains <strong><?= count($articles) ?></strong> articles covering client patching, RCC service, mobile, network, bytecode, and more.</p>
 
@@ -33,6 +28,24 @@ shuffle($allCredits);
             <div class="stat-label">Categories</div>
         </div>
     </div>
+</div>
+
+<h2>Contributors</h2>
+<p class="contributors-intro">Hover over a name to see their contributions.</p>
+
+<div class="contributor-grid">
+    <?php foreach ($contributorMapping as $name => $articles): ?>
+    <div class="contributor-card">
+        <div class="contributor-name"><?= htmlspecialchars($name) ?></div>
+        <div class="contributor-popup">
+            <ul>
+                <?php foreach ($articles as $path): ?>
+                <li><a href="<?= htmlspecialchars(contributorPathUrl($path)) ?>"><?= htmlspecialchars(contributorPathTitle($path)) ?></a></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    </div>
+    <?php endforeach; ?>
 </div>
 
 <h2>Categories</h2>
