@@ -14,5 +14,3 @@
 2. Fix build.gradle — add mavenCentral and Fabric plugin
 3. Add icon resource (Roblox didn't include icons in all builds)
 4. Fix NDK path in android/nativeshell/build.gradle — point runNDKBuild() to your NDK
-
-> ⚠️ This guide is a work in progress.

@@ -4,7 +4,7 @@ A collection of mobile patching guides for Roblox Android clients.
 
 ## Guides
 
-- [Meditation's Guide](meditation-guide.md) — Full patching walkthrough by meditation/meditexts
+- [Meditation's Guide](meditation-guide.md) — meditation/meditexts's patching guide
 - [2016+ Mobile Guide](2016-mobile-guide.md) — Basic domain replacement for 2016+
 - [2018L+ Mobile Guide](2018-plus.md) — Patching steps and endpoints for 2018+
 - [mssky's Mobile Patch Guide](mssky-guide.md) — Android & iOS patching by mssky

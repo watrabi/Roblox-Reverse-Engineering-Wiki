@@ -5,8 +5,8 @@
                 <img src="css/favicon.ico" alt="W" style="width:32px;height:32px;border:none;">
             </a>
         </div>
-        <div class="sidebar-title">Roblox Reverse Engineering Wiki</div>
-        <div class="sidebar-tagline">Roblox Patching Knowledge Base</div>
+        <div class="sidebar-title">RREW</div>
+        <div class="sidebar-tagline">Roblox Reverse Engineering Wiki</div>
         <hr>
         <ul class="sidebar-nav">
             <li><a href="index.php">Main Page</a></li>
