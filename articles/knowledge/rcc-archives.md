@@ -1,5 +1,7 @@
 # RCC & RBXGS Archives
 
+*Outlink*
+
 Archived RCCService and RBXGS installers on the Internet Archive.
 
 - **RCCService (2015-2021):** <https://archive.org/details/20152021RCC>

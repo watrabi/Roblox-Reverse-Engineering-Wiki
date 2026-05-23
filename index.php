@@ -39,7 +39,7 @@ $tree = getArticleTree();
         <h4><?= htmlspecialchars($sinfo['label']) ?></h4>
         <ul>
             <?php foreach ($sinfo['articles'] as $a): ?>
-            <li><a href="<?= htmlspecialchars($a['url']) ?>"><?= htmlspecialchars($a['title']) ?></a></li>
+            <li><a href="<?= htmlspecialchars($a['url']) ?>"<?= !empty($a['outlink']) ? ' class="outlink"' : '' ?>><?= htmlspecialchars($a['title']) ?></a></li>
             <?php endforeach; ?>
         </ul>
         <?php endforeach; ?>

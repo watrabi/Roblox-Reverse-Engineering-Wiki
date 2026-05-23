@@ -41,11 +41,13 @@ function getArticleTree(): array {
                 if (!str_ends_with($sub, '.md')) continue;
                 $name = pathinfo($sub, PATHINFO_FILENAME);
                 $title = ucwords(str_replace(['-', '_'], ' ', preg_replace('/^\d+-/', '', $name)));
+                $outlink = str_contains(file_get_contents($subPath), '*Outlink*');
                 $path = urlencode("$cat/$name");
                 $tree[$cat]['subs']['_root'][] = [
                     'file' => $sub,
                     'title' => $title,
                     'url' => "article.php?path=$path",
+                    'outlink' => $outlink,
                 ];
                 continue;
             }
@@ -56,11 +58,13 @@ function getArticleTree(): array {
                 if ($f[0] === '.' || !str_ends_with($f, '.md')) continue;
                 $name = pathinfo($f, PATHINFO_FILENAME);
                 $title = ucwords(str_replace(['-', '_'], ' ', preg_replace('/^\d+-/', '', $name)));
+                $outlink = str_contains(file_get_contents($subPath . '/' . $f), '*Outlink*');
                 $path = "$cat/$sub/$name";
                 $articles[] = [
                     'file' => $f,
                     'title' => $title,
                     'url' => "article.php?path=" . urlencode($path),
+                    'outlink' => $outlink,
                 ];
             }
 

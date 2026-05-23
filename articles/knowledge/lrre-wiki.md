@@ -1,5 +1,7 @@
 # lrre.wiki (archive)
 
+*Outlink*
+
 The original Roblox reverse engineering wiki, now defunct. Archived captures contain extensive documentation on Roblox networking, RCCService, client internals, and more.
 
 - **URL:** <https://web.archive.org/web/20220000000000*/https://lrre.wiki/>

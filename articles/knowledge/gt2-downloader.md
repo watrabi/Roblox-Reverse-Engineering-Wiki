@@ -1,5 +1,7 @@
 # GameTest2 Client Downloader
 
+*Outlink*
+
 *Credits: GuestDreemurr (author)*
 
 CLI tool for downloading Roblox clients from GameTest2's archive.

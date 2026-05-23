@@ -510,6 +510,15 @@ img {
     font-size: 0.9em;
 }
 
+.category-card li a.outlink {
+    color: #2d7d2d;
+}
+
+.category-card li a.outlink::after {
+    content: " \2197";
+    font-size: 0.75em;
+}
+
 .category-card .article-count {
     color: #54595d;
     font-size: 0.85em;
