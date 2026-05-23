@@ -22,7 +22,3 @@ Run with PHP's built-in server:
 ```bash
 php -S localhost:8000
 ```
-
-## License
-
-The content in this repository is provided for educational and research purposes. Original guides retain their respective authors' ownership. See individual articles for specific credit and licensing details.

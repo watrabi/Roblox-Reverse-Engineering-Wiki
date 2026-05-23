@@ -4,7 +4,7 @@
 <div id="footer">
     <div class="footer-content">
         <div class="footer-left">
-            Roblox Reverse Engineering Wiki &mdash; Community-sourced Roblox reverse engineering and patching guides.
+            Roblox Reverse Engineering Wiki
         </div>
         <div class="footer-right">
             Powered by the community | <strong><?= count(getAllArticles()) ?></strong> articles
