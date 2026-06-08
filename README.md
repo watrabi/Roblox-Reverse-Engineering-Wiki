@@ -4,7 +4,8 @@ Compilation of ORC Guides and reverse engineering documents, a public project th
 
 ## P.S
 
-The site core was sort and written by A.I, it is in a fine-tuning stage and AI Slop removal
+The site core was sort and written by A.I, it passed a fine-tuning stage and AI Slop removal
+
 
 ## Credits
 
